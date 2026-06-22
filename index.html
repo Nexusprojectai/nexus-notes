@@ -26,17 +26,13 @@ input,textarea,button{font-family:inherit;outline:none;border:none}
 .folder-item .folder-color{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .sidebar-footer{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px}
 .sidebar-footer button{flex:1;padding:8px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;transition:.15s}
-.btn-add-folder{background:var(--surface2);color:var(--text2)}
-.btn-add-folder:hover{background:var(--surface3);color:var(--text)}
-.btn-add-note{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}
-.btn-add-note:hover{opacity:.9}
+.btn-add-folder{background:var(--surface2);color:var(--text2)}.btn-add-folder:hover{background:var(--surface3);color:var(--text)}
+.btn-add-note{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}.btn-add-note:hover{opacity:.9}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 .main-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--bg)}
-.main-header h2{font-size:16px;font-weight:600}
-.main-header .note-count{color:var(--text2);font-size:13px}
+.main-header h2{font-size:16px;font-weight:600}.main-header .note-count{color:var(--text2);font-size:13px}
 .search-box{margin-left:auto;display:flex;align-items:center;background:var(--surface2);border-radius:8px;padding:0 12px;gap:8px;border:1px solid transparent;transition:.2s;max-width:240px}
-.search-box:focus-within{border-color:var(--accent)}
-.search-box input{background:none;color:var(--text);padding:8px 0;font-size:13px;width:100%}
+.search-box:focus-within{border-color:var(--accent)}.search-box input{background:none;color:var(--text);padding:8px 0;font-size:13px;width:100%}
 .search-box input::placeholder{color:var(--text2)}
 .notes-grid{flex:1;overflow-y:auto;padding:16px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;align-content:start}
 .notes-grid.empty{display:flex;align-items:center;justify-content:center}
@@ -82,10 +78,8 @@ input,textarea,button{font-family:inherit;outline:none;border:none}
 .modal-box input:focus{border-color:var(--accent)}
 .modal-box .modal-actions{display:flex;gap:8px;justify-content:flex-end}
 .modal-box .modal-actions button{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
-.btn-cancel{background:var(--surface2);color:var(--text2)}
-.btn-cancel:hover{background:var(--surface3)}
-.btn-confirm{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}
-.btn-confirm:hover{opacity:.9}
+.btn-cancel{background:var(--surface2);color:var(--text2)}.btn-cancel:hover{background:var(--surface3)}
+.btn-confirm{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}.btn-confirm:hover{opacity:.9}
 .btn-danger{background:#f44;color:#fff}
 @media(max-width:768px){
 .sidebar{position:fixed;top:0;left:0;bottom:0;transform:translateX(-100%);z-index:150}
@@ -93,8 +87,7 @@ input,textarea,button{font-family:inherit;outline:none;border:none}
 .sidebar-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:149;display:none}
 .sidebar-backdrop.open{display:block}
 .notes-grid{grid-template-columns:1fr;padding:12px 14px}
-.main-header{padding:12px 14px}
-.search-box{max-width:160px}
+.main-header{padding:12px 14px}.search-box{max-width:160px}
 .editor-panel{width:100%;max-width:100%;height:100vh;max-height:100vh;border-radius:0}
 }
 </style>
@@ -122,14 +115,13 @@ input,textarea,button{font-family:inherit;outline:none;border:none}
 <div class="notes-grid" id="notesGrid"></div>
 </main>
 </div>
-
 <div class="editor-overlay" id="editorOverlay">
 <div class="editor-panel">
 <div class="editor-header">
-<button class="close-btn" id="closeEditorBtn">✕</button>
+<button class="close-btn" id="closeEditorBtn">&#10005;</button>
 <div class="editor-actions">
-<button class="btn-pin" id="pinBtn">📌</button>
-<button class="btn-delete" id="deleteBtn">🗑️</button>
+<button class="btn-pin" id="pinBtn">&#128204;</button>
+<button class="btn-delete" id="deleteBtn">&#128465;</button>
 </div>
 </div>
 <div class="editor-body">
@@ -138,13 +130,12 @@ input,textarea,button{font-family:inherit;outline:none;border:none}
 <select id="folderSelect"></select>
 <span class="date-info" id="dateInfo"></span>
 </div>
-<button class="preview-toggle" id="previewToggle">👁️ Preview</button>
+<button class="preview-toggle" id="previewToggle">&#128065; Preview</button>
 <textarea class="content-input" id="contentInput" placeholder="Start writing..."></textarea>
 <div class="preview-area" id="previewArea"></div>
 </div>
 </div>
 </div>
-
 <div class="modal-overlay" id="modalOverlay">
 <div class="modal-box">
 <h3 id="modalTitle">New Folder</h3>
@@ -160,7 +151,6 @@ input,textarea,button{font-family:inherit;outline:none;border:none}
 </div>
 </div>
 </div>
-
 <script>
 const DB_NAME='nexus-notes-db',DB_VER=1;
 function openDB(){return new Promise((rs,rj)=>{const r=indexedDB.open(DB_NAME,DB_VER);r.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('folders')){const s=d.createObjectStore('folders',{keyPath:'id'});s.createIndex('order','order')}
@@ -168,126 +158,37 @@ if(!d.objectStoreNames.contains('notes')){const s=d.createObjectStore('notes',{k
 function dbAll(s){return openDB().then(d=>new Promise((rs,rj)=>{const t=d.transaction(s,'readonly'),st=t.objectStore(s),r=st.getAll();r.onsuccess=()=>{rs(r.result);d.close()};r.onerror=()=>{rj(r.error);d.close()}}))}
 function dbPut(s,data){return openDB().then(d=>new Promise((rs,rj)=>{const t=d.transaction(s,'readwrite'),st=t.objectStore(s),r=st.put(data);r.onsuccess=()=>{rs(r.result);d.close()};r.onerror=()=>{rj(r.error);d.close()}}))}
 function dbDelete(s,id){return openDB().then(d=>new Promise((rs,rj)=>{const t=d.transaction(s,'readwrite'),st=t.objectStore(s),r=st.delete(id);r.onsuccess=()=>{rs();d.close()};r.onerror=()=>{rj(r.error);d.close()}}))}
-
 let folders=[],notes=[],currentFolderId=null,editingNoteId=null,searchQuery='',autoSaveTimer=null;
 const $=id=>document.getElementById(id);
 const sidebar=$('sidebar'),sidebarBackdrop=$('sidebarBackdrop'),folderList=$('folderList'),notesGrid=$('notesGrid'),currentFolderTitle=$('currentFolderTitle'),noteCount=$('noteCount'),searchInput=$('searchInput'),editorOverlay=$('editorOverlay'),titleInput=$('titleInput'),contentInput=$('contentInput'),folderSelect=$('folderSelect'),dateInfo=$('dateInfo'),pinBtn=$('pinBtn'),deleteBtn=$('deleteBtn'),closeEditorBtn=$('closeEditorBtn'),previewToggle=$('previewToggle'),previewArea=$('previewArea'),modalOverlay=$('modalOverlay'),modalTitle=$('modalTitle'),modalInput=$('modalInput'),modalColor=$('modalColor'),modalConfirm=$('modalConfirm'),modalCancel=$('modalCancel'),addFolderBtn=$('addFolderBtn'),addNoteBtn=$('addNoteBtn');
-
 function uid(){return Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7)}
 function fmtDate(ts){const d=new Date(ts),n=new Date(),diff=n-d;if(diff<6e4)return'Just now';if(diff<36e5)return Math.floor(diff/6e4)+'m ago';if(diff<864e5)return Math.floor(diff/36e5)+'h ago';if(diff<6048e5)return Math.floor(diff/864e5)+'d ago';return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}
-
-function renderSidebar(){
-let html=`<div class="folder-item ${currentFolderId===null?'active':''}" data-id="all"><span class="folder-color" style="background:#0ff"></span>📋 All Notes<span class="badge">${notes.length}</span></div>`
-const uncat=notes.filter(n=>!n.folderId||!folders.find(f=>f.id===n.folderId)).length
-html+=`<div class="folder-item ${currentFolderId==='uncategorized'?'active':''}" data-id="uncategorized"><span class="folder-color" style="background:#888"></span>📥 Uncategorized<span class="badge">${uncat}</span></div>`
-folders.filter(f=>!f.builtIn).sort((a,b)=>a.order-b.order).forEach(f=>{const cnt=notes.filter(n=>n.folderId===f.id).length;html+=`<div class="folder-item ${currentFolderId===f.id?'active':''}" data-id="${f.id}"><span class="folder-color" style="background:${f.color}"></span>📁 ${f.name}<span class="badge">${cnt}</span></div>`})
-folderList.innerHTML=html
-folderList.querySelectorAll('.folder-item').forEach(el=>{el.addEventListener('click',()=>{const id=el.dataset.id;currentFolderId=id==='all'?null:id;render();closeSidebar()})})
-}
-
-function renderNotes(){
-let filtered=[...notes]
-if(currentFolderId==='uncategorized')filtered=filtered.filter(n=>!n.folderId||!folders.find(f=>f.id===n.folderId))
-else if(currentFolderId)filtered=filtered.filter(n=>n.folderId===currentFolderId)
-if(searchQuery.trim()){const q=searchQuery.trim().toLowerCase();filtered=filtered.filter(n=>n.title.toLowerCase().includes(q)||n.content.toLowerCase().includes(q))}
-filtered.sort((a,b)=>{if(a.pinned&&!b.pinned)return-1;if(!a.pinned&&b.pinned)return 1;return(b.updatedAt||0)-(a.updatedAt||0)})
-currentFolderTitle.textContent=currentFolderId===null?'All Notes':currentFolderId==='uncategorized'?'Uncategorized':(folders.find(f=>f.id===currentFolderId)?.name||'Notes')
-noteCount.textContent=filtered.length?`(${filtered.length})`:''
-if(!filtered.length){notesGrid.className='notes-grid empty';notesGrid.innerHTML=`<div class="empty-state"><div class="icon">${searchQuery.trim()?'🔍':'📝'}</div><h3>${searchQuery.trim()?'No notes found':'No notes yet'}</h3><p>${searchQuery.trim()?'Try a different search':'Click "+ New Note" to create your first note'}</p></div>`;return}
-notesGrid.className='notes-grid'
-let html=''
-filtered.forEach(n=>{const f=n.folderId?folders.find(f=>f.id===n.folderId):null;const preview=(n.content||'').replace(/[#*`\[\]]/g,'').slice(0,120);html+=`<div class="note-card ${n.pinned?'pinned':''}" data-id="${n.id}"><div class="card-title">${n.title||'Untitled'}</div><div class="card-preview">${preview||'Empty note...'}</div><div class="card-footer"><span class="card-folder">${f?f.name:'📥 Uncategorized'}</span><span class="card-date">${fmtDate(n.updatedAt||n.createdAt)}</span></div></div>`})
-notesGrid.innerHTML=html
-notesGrid.querySelectorAll('.note-card').forEach(el=>{el.addEventListener('click',()=>openEditor(el.dataset.id))})
-}
-
+function renderSidebar(){let html='<div class="folder-item '+(currentFolderId===null?'active':'')+'" data-id="all"><span class="folder-color" style="background:#0ff"></span>&#128203; All Notes<span class="badge">'+notes.length+'</span></div>';const uncat=notes.filter(n=>!n.folderId||!folders.find(f=>f.id===n.folderId)).length;html+='<div class="folder-item '+(currentFolderId==='uncategorized'?'active':'')+'" data-id="uncategorized"><span class="folder-color" style="background:#888"></span>&#128229; Uncategorized<span class="badge">'+uncat+'</span></div>';folders.filter(f=>!f.builtIn).sort((a,b)=>a.order-b.order).forEach(f=>{const cnt=notes.filter(n=>n.folderId===f.id).length;html+='<div class="folder-item '+(currentFolderId===f.id?'active':'')+'" data-id="'+f.id+'"><span class="folder-color" style="background:'+f.color+'"></span>&#128193; '+f.name+'<span class="badge">'+cnt+'</span></div>'});folderList.innerHTML=html;folderList.querySelectorAll('.folder-item').forEach(el=>{el.addEventListener('click',()=>{const id=el.dataset.id;currentFolderId=id==='all'?null:id;render();closeSidebar()})})}
+function renderNotes(){let filtered=[...notes];if(currentFolderId==='uncategorized')filtered=filtered.filter(n=>!n.folderId||!folders.find(f=>f.id===n.folderId));else if(currentFolderId)filtered=filtered.filter(n=>n.folderId===currentFolderId);if(searchQuery.trim()){const q=searchQuery.trim().toLowerCase();filtered=filtered.filter(n=>n.title.toLowerCase().includes(q)||n.content.toLowerCase().includes(q))}filtered.sort((a,b)=>{if(a.pinned&&!b.pinned)return-1;if(!a.pinned&&b.pinned)return 1;return(b.updatedAt||0)-(a.updatedAt||0)});currentFolderTitle.textContent=currentFolderId===null?'All Notes':currentFolderId==='uncategorized'?'Uncategorized':(folders.find(f=>f.id===currentFolderId)?.name||'Notes');noteCount.textContent=filtered.length?'('+filtered.length+')':'';if(!filtered.length){notesGrid.className='notes-grid empty';notesGrid.innerHTML='<div class="empty-state"><div class="icon">'+(searchQuery.trim()?'&#128269;':'&#128221;')+'</div><h3>'+(searchQuery.trim()?'No notes found':'No notes yet')+'</h3><p>'+(searchQuery.trim()?'Try a different search':'Click "+ New Note" to create your first note')+'</p></div>';return}notesGrid.className='notes-grid';let html='';filtered.forEach(n=>{const f=n.folderId?folders.find(f=>f.id===n.folderId):null;const preview=(n.content||'').replace(/[#*`\[\]]/g,'').slice(0,120);html+='<div class="note-card '+(n.pinned?'pinned':'')+'" data-id="'+n.id+'"><div class="card-title">'+(n.title||'Untitled')+'</div><div class="card-preview">'+(preview||'Empty note...')+'</div><div class="card-footer"><span class="card-folder">'+(f?f.name:'&#128229; Uncategorized')+'</span><span class="card-date">'+fmtDate(n.updatedAt||n.createdAt)+'</span></div></div>'});notesGrid.innerHTML=html;notesGrid.querySelectorAll('.note-card').forEach(el=>{el.addEventListener('click',()=>openEditor(el.dataset.id))})}
 function render(){renderSidebar();renderNotes()}
 function openSidebar(){sidebar.classList.add('open');sidebarBackdrop.classList.add('open')}
 function closeSidebar(){sidebar.classList.remove('open');sidebarBackdrop.classList.remove('open')}
-
-function openEditor(noteId){
-editingNoteId=noteId;const note=notes.find(n=>n.id===noteId)
-if(note){titleInput.value=note.title||'';contentInput.value=note.content||'';pinBtn.classList.toggle('active',!!note.pinned);dateInfo.textContent=note.updatedAt?'Edited '+fmtDate(note.updatedAt):''}
-else{titleInput.value='';contentInput.value='';pinBtn.classList.remove('active');dateInfo.textContent='New note'}
-folderSelect.innerHTML='<option value="">No folder</option>'
-folders.filter(f=>!f.builtIn).forEach(f=>{const opt=document.createElement('option');opt.value=f.id;opt.textContent='📁 '+f.name;if(note&&note.folderId===f.id)opt.selected=true;folderSelect.appendChild(opt)})
-previewArea.style.display='none';previewArea.textContent='';contentInput.style.display='block'
-editorOverlay.classList.add('open')
-}
-
+function openEditor(noteId){editingNoteId=noteId;const note=notes.find(n=>n.id===noteId);if(note){titleInput.value=note.title||'';contentInput.value=note.content||'';pinBtn.classList.toggle('active',!!note.pinned);dateInfo.textContent=note.updatedAt?'Edited '+fmtDate(note.updatedAt):''}else{titleInput.value='';contentInput.value='';pinBtn.classList.remove('active');dateInfo.textContent='New note'}folderSelect.innerHTML='<option value="">No folder</option>';folders.filter(f=>!f.builtIn).forEach(f=>{const opt=document.createElement('option');opt.value=f.id;opt.textContent='&#128193; '+f.name;if(note&&note.folderId===f.id)opt.selected=true;folderSelect.appendChild(opt)});previewArea.style.display='none';previewArea.textContent='';contentInput.style.display='block';editorOverlay.classList.add('open')}
 function closeEditor(){if(editingNoteId)saveCurrentNote();editorOverlay.classList.remove('open');editingNoteId=null}
-
-function saveCurrentNote(){
-const title=titleInput.value.trim(),content=contentInput.value,folderId=folderSelect.value||null,now=Date.now()
-if(!title&&!content)return
-if(editingNoteId){const ex=notes.find(n=>n.id===editingNoteId);if(ex){ex.title=title;ex.content=content;ex.folderId=folderId;ex.updatedAt=now;dbPut('notes',ex).then(()=>{notes=notes.map(n=>n.id===ex.id?ex:n);render()});return}}
-const n={id:uid(),title:title||'Untitled',content,folderId,pinned:false,createdAt:now,updatedAt:now}
-dbPut('notes',n).then(()=>{notes.push(n);editingNoteId=n.id;render()})
-}
-
-function deleteCurrentNote(){
-if(!editingNoteId)return;const note=notes.find(n=>n.id===editingNoteId);if(!note)return
-modalTitle.textContent='Delete Note?';modalInput.style.display='none';modalColor.style.display='none'
-const msg=document.createElement('p');msg.textContent=`Delete "${note.title||'Untitled'}"?`;msg.style.cssText='color:#f44;margin:0 0 16px;font-size:14px'
-modalBox.querySelector('.modal-actions').before(msg)
-modalConfirm.textContent='Delete';modalConfirm.className='btn-danger'
-modalOverlay.classList.add('open')
-modalConfirm.onclick=()=>{dbDelete('notes',editingNoteId).then(()=>{notes=notes.filter(n=>n.id!==editingNoteId);closeEditor();render();closeModal()})}
-}
-
-function openModal(title,placeholder,cb){
-modalTitle.textContent=title;modalInput.style.display='block';modalColor.style.display='block';modalInput.value='';modalInput.placeholder=placeholder||'Name...'
-modalConfirm.textContent='Create';modalConfirm.className='btn-confirm'
-const e=modalBox.querySelector('p');if(e)e.remove()
-modalOverlay.classList.add('open');setTimeout(()=>modalInput.focus(),100)
-modalConfirm.onclick=()=>{const v=modalInput.value.trim();if(!v)return;cb(v);closeModal()}
-}
-
-function closeModal(){modalOverlay.classList.remove('open');const e=modalBox.querySelector('p');if(e)e.remove()}
-
-addNoteBtn.addEventListener('click',()=>{
-const n={id:uid(),title:'',content:'',folderId:(currentFolderId&&currentFolderId!=='uncategorized'&amp;&amp;currentFolderId!=='all')?currentFolderId:null,pinned:false,createdAt:Date.now(),updatedAt:Date.now()}
-dbPut('notes',n).then(()=>{notes.push(n);render();openEditor(n.id)});closeSidebar()})
-
+function saveCurrentNote(){const title=titleInput.value.trim(),content=contentInput.value,folderId=folderSelect.value||null,now=Date.now();if(!title&&!content)return;if(editingNoteId){const ex=notes.find(n=>n.id===editingNoteId);if(ex){ex.title=title;ex.content=content;ex.folderId=folderId;ex.updatedAt=now;dbPut('notes',ex).then(()=>{notes=notes.map(n=>n.id===ex.id?ex:n);render()});return}}const n={id:uid(),title:title||'Untitled',content,folderId,pinned:false,createdAt:now,updatedAt:now};dbPut('notes',n).then(()=>{notes.push(n);editingNoteId=n.id;render()})}
+function deleteCurrentNote(){if(!editingNoteId)return;const note=notes.find(n=>n.id===editingNoteId);if(!note)return;modalTitle.textContent='Delete Note?';modalInput.style.display='none';modalColor.style.display='none';const msg=document.createElement('p');msg.textContent='Delete "'+(note.title||'Untitled')+'"?';msg.style.cssText='color:#f44;margin:0 0 16px;font-size:14px';document.querySelector('#modalOverlay .modal-actions').before(msg);modalConfirm.textContent='Delete';modalConfirm.className='btn-danger';modalOverlay.classList.add('open');modalConfirm.onclick=()=>{dbDelete('notes',editingNoteId).then(()=>{notes=notes.filter(n=>n.id!==editingNoteId);closeEditor();render();closeModal()})}}
+function openModal(title,placeholder,cb){modalTitle.textContent=title;modalInput.style.display='block';modalColor.style.display='block';modalInput.value='';modalInput.placeholder=placeholder||'Name...';modalConfirm.textContent='Create';modalConfirm.className='btn-confirm';const e=document.querySelector('#modalBox p');if(e)e.remove();modalOverlay.classList.add('open');setTimeout(()=>modalInput.focus(),100);modalConfirm.onclick=()=>{const v=modalInput.value.trim();if(!v)return;cb(v);closeModal()}}
+function closeModal(){modalOverlay.classList.remove('open');const e=document.querySelector('#modalBox p');if(e)e.remove()}
+addNoteBtn.addEventListener('click',()=>{const n={id:uid(),title:'',content:'',folderId:(currentFolderId&&currentFolderId!=='uncategorized'&&currentFolderId!=='all')?currentFolderId:null,pinned:false,createdAt:Date.now(),updatedAt:Date.now()};dbPut('notes',n).then(()=>{notes.push(n);render();openEditor(n.id)});closeSidebar()})
 addFolderBtn.addEventListener('click',()=>{openModal('New Folder','Folder name...',(name)=>{const f={id:uid(),name,color:modalColor.value,order:folders.filter(f=>!f.builtIn).length+1,createdAt:Date.now(),updatedAt:Date.now()};dbPut('folders',f).then(()=>{folders.push(f);render()})})})
-
 closeEditorBtn.addEventListener('click',closeEditor)
-
 pinBtn.addEventListener('click',()=>{if(!editingNoteId)return;const n=notes.find(n=>n.id===editingNoteId);if(!n)return;n.pinned=!n.pinned;n.updatedAt=Date.now();pinBtn.classList.toggle('active',n.pinned);dbPut('notes',n).then(()=>render())})
-
 deleteBtn.addEventListener('click',deleteCurrentNote)
 modalCancel.addEventListener('click',closeModal)
 modalOverlay.addEventListener('click',e=>{if(e.target===modalOverlay)closeModal()})
 editorOverlay.addEventListener('click',e=>{if(e.target===editorOverlay)closeEditor()})
-
 searchInput.addEventListener('input',e=>{searchQuery=e.target.value;renderNotes()})
-
-previewToggle.addEventListener('click',()=>{
-if(previewArea.style.display==='block'){previewArea.style.display='none';contentInput.style.display='block';previewToggle.textContent='👁️ Preview'}
-else{let h=contentInput.value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/### (.+)/g,'<h3>$1</h3>').replace(/## (.+)/g,'<h2>$1</h2>').replace(/# (.+)/g,'<h1>$1</h1>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`(.+?)`/g,'<code>$1</code>').replace(/- (.+)/g,'• $1').replace(/\n/g,'<br/>')
-previewArea.innerHTML=h;previewArea.style.display='block';contentInput.style.display='none';previewToggle.textContent='✏️ Edit'}
-})
-
+previewToggle.addEventListener('click',()=>{if(previewArea.style.display==='block'){previewArea.style.display='none';contentInput.style.display='block';previewToggle.textContent='&#128065; Preview'}else{let h=contentInput.value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/### (.+)/g,'<h3>$1</h3>').replace(/## (.+)/g,'<h2>$1</h2>').replace(/# (.+)/g,'<h1>$1</h1>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`(.+?)`/g,'<code>$1</code>').replace(/- (.+)/g,'&#8226; $1').replace(/\n/g,'<br/>');previewArea.innerHTML=h;previewArea.style.display='block';contentInput.style.display='none';previewToggle.textContent='&#9998; Edit'}})
 titleInput.addEventListener('input',()=>{clearTimeout(autoSaveTimer);autoSaveTimer=setTimeout(saveCurrentNote,800)})
 contentInput.addEventListener('input',()=>{clearTimeout(autoSaveTimer);autoSaveTimer=setTimeout(saveCurrentNote,800)})
-
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&amp;&amp;editorOverlay.classList.contains('open'))closeEditor()})
-
-// ─── INIT ───
-loadData()
-async function loadData(){
-folders=await dbAll('folders');notes=await dbAll('notes')
-if(!folders.length){
-const defs=[
-{id:'personal',name:'Personal',color:'#ff6b9d',order:1},
-{id:'work',name:'Work',color:'#7b68ee',order:2},
-{id:'ideas',name:'Ideas',color:'#ffdd44',order:3}]
-for(const f of defs)await dbPut('folders',{...f,createdAt:Date.now(),updatedAt:Date.now()})
-folders=await dbAll('folders')}
-render()}
-
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})
-console.log('📝 Nexus Notes loaded!')
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&editorOverlay.classList.contains('open'))closeEditor()})
+async function loadData(){folders=await dbAll('folders');notes=await dbAll('notes');if(!folders.length){const defs=[{id:'personal',name:'Personal',color:'#ff6b9d',order:1},{id:'work',name:'Work',color:'#7b68ee',order:2},{id:'ideas',name:'Ideas',color:'#ffdd44',order:3}];for(const f of defs)await dbPut('folders',{...f,createdAt:Date.now(),updatedAt:Date.now()});folders=await dbAll('folders')}render()}
+loadData();if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});console.log('Nexus Notes loaded!')
 </script>
 </body>
 </html>
